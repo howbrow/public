@@ -1,30 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Page</title>
+</head>
+<body style="margin:0;font-family:Arial,sans-serif;">
 
-<body class="light-mode">
-<script>
-(function(){
-  var def = window.__THEME_DEFAULT__ || 'light';
-  var k = window.__THEME_LS_KEY || 'theme';
-  var ls = localStorage.getItem(k);
-  var mode;
-  if (ls === 'light' || ls === 'dark') {
-    mode = ls;
-  } else {
-    if (def === 'system') {
-      mode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    } else {
-      mode = def === 'dark' ? 'dark' : 'light';
-    }
-    localStorage.setItem(k, mode);
-  }
-  document.body.classList.remove('light-mode','dark-mode');
-  document.body.classList.add(mode === 'dark' ? 'dark-mode' : 'light-mode');
-})();
-</script>
-<header>
-  <a href="/" style="text-decoration: none; color: inherit;"><div class="logo_main_menu">
-    <div class="logo-icon_main_menu"><i class="fas fa-globe"></i></div>
-    <div class="logo-text_main_menu">StyleWeb</div>
-  </div></a><div style="padding-right: 40px;"></div>
-  
+  <div id="header-placeholder"></div>
+
+  <main style="max-width:900px;margin:40px auto;padding:0 20px;">
+    <h1>Test App Page</h1>
+    <p>Yeh test content hai. Header alag file se load ho raha hai.</p>
+  </main>
+
+  <script>
+    fetch('header.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('header-placeholder').innerHTML = html;
+      });
+  </script>
+</body>
+</html>
